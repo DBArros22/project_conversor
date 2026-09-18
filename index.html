@@ -1,3 +1,7 @@
+Aqui estão os códigos ajustados, com todas as funções e variáveis em português, mantendo a estrutura modular em arquivos separados (index.html, style.css e app.js).
+
+1. index.html
+HTML
 <!DOCTYPE html>
 <html lang="pt-BR" class="dark">
 <head>
@@ -25,7 +29,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Arquivo CSS Externo -->
     <link rel="stylesheet" href="style.css">
-    <!-- Bibliotecas externas para manipulação de arquivos (PDF e ZIP) -->
+    <!-- Bibliotecas externas (PDF e ZIP) -->
     <script src="https://unpkg.com/pdf-lib@1.4.0/dist/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
@@ -46,50 +50,50 @@
         </div>
     </header>
 
-    <!-- Main Container (SPA Content) -->
+    <!-- Main Container -->
     <main class="flex-grow max-w-7xl mx-auto px-4 py-8 w-full grid grid-cols-1 lg:grid-cols-4 gap-8">
         
-        <!-- Sidebar / Navegação de Ferramentas -->
+        <!-- Sidebar / Navegação -->
         <aside class="lg:col-span-1 space-y-2">
             <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 px-2">Ferramentas Disponíveis</h2>
             
-            <button onclick="switchTool('image')" id="btn-image" class="tool-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all bg-accentGreen text-darkBg font-medium shadow-lg shadow-accentGreen/10">
+            <button onclick="alternarFerramenta('imagem')" id="btn-imagem" class="botao-ferramenta w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all bg-accentGreen text-darkBg font-medium shadow-lg shadow-accentGreen/10 cursor-pointer">
                 <i class="fa-solid fa-image w-5 text-center"></i>
                 <span>Conversor de Imagens</span>
             </button>
 
-            <button onclick="switchTool('pdf')" id="btn-pdf" class="tool-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all text-slate-300 hover:bg-slate-800/60 hover:text-white">
+            <button onclick="alternarFerramenta('pdf')" id="btn-pdf" class="botao-ferramenta w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all text-slate-300 hover:bg-slate-800/60 hover:text-white cursor-pointer">
                 <i class="fa-solid fa-file-pdf w-5 text-center"></i>
                 <span>Unir PDF</span>
             </button>
 
-            <button onclick="switchTool('zip')" id="btn-zip" class="tool-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all text-slate-300 hover:bg-slate-800/60 hover:text-white">
+            <button onclick="alternarFerramenta('zip')" id="btn-zip" class="botao-ferramenta w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all text-slate-300 hover:bg-slate-800/60 hover:text-white cursor-pointer">
                 <i class="fa-solid fa-file-zipper w-5 text-center"></i>
                 <span>Criador de Arquivo ZIP</span>
             </button>
         </aside>
 
-        <!-- Painel de Operação Dinâmico -->
+        <!-- Painel de Operação -->
         <section class="lg:col-span-3 bg-cardBg rounded-2xl border border-slate-800 p-6 shadow-xl flex flex-col justify-between">
             
-            <!-- TOOL 1: CONVERSOR DE IMAGENS -->
-            <div id="tool-image" class="tool-pane space-y-6">
+            <!-- PAINEL 1: IMAGEM -->
+            <div id="painel-imagem" class="painel-ferramenta space-y-6">
                 <div>
                     <h3 class="text-xl font-bold text-white mb-1">Conversor & Redimensionador de Imagens</h3>
                     <p class="text-sm text-slate-400">Converta PNG/JPG para WebP ou redimensione imagens direto no navegador.</p>
                 </div>
 
-                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('img-file').click()">
-                    <input type="file" id="img-file" accept="image/*" class="hidden" onchange="handleImageSelect(event)">
+                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('arquivo-imagem').click()">
+                    <input type="file" id="arquivo-imagem" accept="image/*" class="hidden" onchange="tratarSelecaoImagem(event)">
                     <i class="fa-solid fa-cloud-arrow-up text-4xl text-accentGreen mb-3"></i>
                     <p class="text-sm font-medium text-slate-200">Clique para selecionar a imagem ou arraste aqui</p>
-                    <p id="img-file-name" class="text-xs text-accentGreen mt-2 font-mono"></p>
+                    <p id="nome-arquivo-imagem" class="text-xs text-accentGreen mt-2 font-mono"></p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-medium text-slate-400 mb-1">Formato de Saída</label>
-                        <select id="img-format" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-accentGreen">
+                        <select id="formato-saida-imagem" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-accentGreen">
                             <option value="image/webp">WebP (Alta Performance)</option>
                             <option value="image/jpeg">JPEG</option>
                             <option value="image/png">PNG</option>
@@ -97,57 +101,57 @@
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-slate-400 mb-1">Qualidade (0.1 a 1.0)</label>
-                        <input type="number" id="img-quality" value="0.8" step="0.1" min="0.1" max="1.0" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-accentGreen">
+                        <input type="number" id="qualidade-imagem" value="0.8" step="0.1" min="0.1" max="1.0" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-accentGreen">
                     </div>
                 </div>
 
-                <button onclick="convertImage()" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all shadow-lg shadow-accentGreen/20 cursor-pointer">
+                <button onclick="converterImagem()" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all shadow-lg shadow-accentGreen/20 cursor-pointer">
                     Converter Imagem
                 </button>
             </div>
 
-            <!-- TOOL 2: PDF TOOLS -->
-            <div id="tool-pdf" class="tool-pane space-y-6 hidden">
+            <!-- PAINEL 2: PDF -->
+            <div id="painel-pdf" class="painel-ferramenta space-y-6 hidden">
                 <div>
                     <h3 class="text-xl font-bold text-white mb-1">Unir Múltiplos PDFs</h3>
                     <p class="text-sm text-slate-400">Selecione vários arquivos PDF para combiná-los em um único documento sequencial.</p>
                 </div>
 
-                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('pdf-files').click()">
-                    <input type="file" id="pdf-files" accept="application/pdf" multiple class="hidden" onchange="handlePdfSelect(event)">
+                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('arquivos-pdf').click()">
+                    <input type="file" id="arquivos-pdf" accept="application/pdf" multiple class="hidden" onchange="tratarSelecaoPdf(event)">
                     <i class="fa-solid fa-file-pdf text-4xl text-accentGreen mb-3"></i>
                     <p class="text-sm font-medium text-slate-200">Selecione dois ou mais arquivos PDF</p>
-                    <p id="pdf-file-count" class="text-xs text-accentGreen mt-2 font-mono"></p>
+                    <p id="contador-arquivos-pdf" class="text-xs text-accentGreen mt-2 font-mono"></p>
                 </div>
 
-                <button onclick="mergePdfs()" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all shadow-lg shadow-accentGreen/20 cursor-pointer">
+                <button onclick="mesclarPdfs()" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all shadow-lg shadow-accentGreen/20 cursor-pointer">
                     Mesclar PDFs
                 </button>
             </div>
 
-            <!-- TOOL 3: CRIADOR DE ZIP -->
-            <div id="tool-zip" class="tool-pane space-y-6 hidden">
+            <!-- PAINEL 3: ZIP -->
+            <div id="painel-zip" class="painel-ferramenta space-y-6 hidden">
                 <div>
                     <h3 class="text-xl font-bold text-white mb-1">Compactador ZIP</h3>
                     <p class="text-sm text-slate-400">Selecione múltiplos arquivos de qualquer formato para baixar um único arquivo .zip compactado.</p>
                 </div>
 
-                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('zip-files').click()">
-                    <input type="file" id="zip-files" multiple class="hidden" onchange="handleZipSelect(event)">
+                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('arquivos-zip').click()">
+                    <input type="file" id="arquivos-zip" multiple class="hidden" onchange="tratarSelecaoZip(event)">
                     <i class="fa-solid fa-file-zipper text-4xl text-accentGreen mb-3"></i>
                     <p class="text-sm font-medium text-slate-200">Selecione os arquivos para compactar</p>
-                    <p id="zip-file-count" class="text-xs text-accentGreen mt-2 font-mono"></p>
+                    <p id="contador-arquivos-zip" class="text-xs text-accentGreen mt-2 font-mono"></p>
                 </div>
 
-                <button onclick="createZip()" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all shadow-lg shadow-accentGreen/20 cursor-pointer">
+                <button onclick="criarZip()" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all shadow-lg shadow-accentGreen/20 cursor-pointer">
                     Gerar Arquivo ZIP
                 </button>
             </div>
 
-            <!-- Status / Feedback Area -->
-            <div id="status-box" class="mt-6 pt-4 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between">
+            <!-- Feedback -->
+            <div id="caixa-status" class="mt-6 pt-4 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between">
                 <span>Status: <strong class="text-accentGreen">Pronto para uso</strong></span>
-                <span id="action-feedback" class="font-mono text-slate-300"></span>
+                <span id="feedback-acao" class="font-mono text-slate-300"></span>
             </div>
         </section>
 
