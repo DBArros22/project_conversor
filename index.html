@@ -21,17 +21,15 @@
             }
         }
     </script>
-    <!-- FontAwesome para Ícones -->
+    <!-- fontAwesome para Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Arquivo CSS Externo -->
+    <!-- arquivo CSS Externo -->
     <link rel="stylesheet" href="style.css">
-    <!-- Bibliotecas externas (PDF e ZIP) -->
+    <!-- bibliotecas externas (PDF e ZIP) -->
     <script src="https://unpkg.com/pdf-lib@1.4.0/dist/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 <body class="bg-darkBg text-slate-100 min-h-screen flex flex-col font-sans">
-
-    <!-- Header -->
     <header class="border-b border-slate-800 bg-cardBg/50 backdrop-blur sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
@@ -46,7 +44,7 @@
         </div>
     </header>
 
-    <!-- Main Container -->
+                       <!-- main container -->    
     <main class="flex-grow max-w-7xl mx-auto px-4 py-8 w-full grid grid-cols-1 lg:grid-cols-4 gap-8">
         
         <!-- Sidebar / Navegação -->
@@ -68,11 +66,8 @@
                 <span>Criador de Arquivo ZIP</span>
             </button>
         </aside>
-
-        <!-- Painel de Operação -->
-        <section class="lg:col-span-3 bg-cardBg rounded-2xl border border-slate-800 p-6 shadow-xl flex flex-col justify-between">
-            
-            <!-- PAINEL 1: IMAGEM -->
+        <section class="lg:col-span-3 bg-cardBg rounded-2xl border border-slate-800 p-6 shadow-xl flex flex-col justify-between">   <!-- painel de operação  -->
+                      
             <div id="painel-imagem" class="painel-ferramenta space-y-6">
                 <div>
                     <h3 class="text-xl font-bold text-white mb-1">Conversor & Redimensionador de Imagens</h3>
@@ -106,8 +101,7 @@
                 </button>
             </div>
 
-            <!-- PAINEL 2: PDF -->
-            <div id="painel-pdf" class="painel-ferramenta space-y-6 hidden">
+            <div id="painel-pdf" class="painel-ferramenta space-y-6 hidden">  <!-- Painel de pdf -->
                 <div>
                     <h3 class="text-xl font-bold text-white mb-1">Unir Múltiplos PDFs</h3>
                     <p class="text-sm text-slate-400">Selecione vários arquivos PDF para combiná-los em um único documento sequencial.</p>
@@ -125,7 +119,7 @@
                 </button>
             </div>
 
-            <!-- PAINEL 3: ZIP -->
+            <!-- painel zip -->
             <div id="painel-zip" class="painel-ferramenta space-y-6 hidden">
                 <div>
                     <h3 class="text-xl font-bold text-white mb-1">Compactador ZIP</h3>
@@ -144,7 +138,7 @@
                 </button>
             </div>
 
-            <!-- Feedback -->
+            <!-- resposta feedback -->
             <div id="caixa-status" class="mt-6 pt-4 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between">
                 <span>Status: <strong class="text-accentGreen">Pronto para uso</strong></span>
                 <span id="feedback-acao" class="font-mono text-slate-300"></span>
@@ -152,13 +146,9 @@
         </section>
 
     </main>
-
-    <!-- Footer -->
     <footer class="border-t border-slate-800 py-4 text-center text-xs text-slate-500">
         WebTools Box &copy; 2026 — Desenvolvido para Portfólio Profissional
     </footer>
-
-    <!-- Arquivo JavaScript Externo -->
-    <script src="app.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
