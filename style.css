@@ -1,0 +1,20 @@
+body {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+/* Transições suaves para os painéis SPA */
+.tool-pane {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
