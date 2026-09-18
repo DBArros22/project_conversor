@@ -3,8 +3,7 @@ body {
     color: #f8fafc;
 }
 
-/* Transições suaves para os painéis SPA */
-.tool-pane {
+.painel-ferramenta {
     animation: fadeIn 0.3s ease-in-out;
 }
 
