@@ -1,9 +1,12 @@
+Aqui está o seu arquivo index.html ajustado para contemplar todas as ferramentas robustas que você deseja (Conversor de Imagens, Mesclagem de PDFs, Compactador ZIP e o Status do Servidor Node.js):
+
+HTML
 <!DOCTYPE html>
 <html lang="pt-BR" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebTools Box - API & Processador de Arquivos</title>
+    <title>WebTools Box - Conversor & Manipulador de Arquivos</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -25,6 +28,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Arquivo CSS Externo -->
     <link rel="stylesheet" href="style.css">
+    <!-- Bibliotecas externas para PDF e ZIP -->
+    <script src="https://unpkg.com/pdf-lib@1.4.0/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 <body class="bg-darkBg text-slate-100 min-h-screen flex flex-col font-sans">
 
@@ -33,12 +39,12 @@
         <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
                 <div class="bg-accentGreen/10 p-2 rounded-lg border border-accentGreen/30 text-accentGreen">
-                    <i class="fa-solid fa-server text-xl"></i>
+                    <i class="fa-solid fa-box-archive text-xl"></i>
                 </div>
-                <span class="text-xl font-bold tracking-wide">Web<span class="text-accentGreen">Tools</span> API Client</span>
+                <span class="text-xl font-bold tracking-wide">Web<span class="text-accentGreen">Tools</span> Box</span>
             </div>
             <div class="text-xs text-slate-400 bg-slate-800/80 px-3 py-1.5 rounded-full border border-slate-700">
-                <i class="fa-solid fa-circle-nodes text-accentGreen mr-1"></i> Backend Node.js / Fastify Conectado
+                <i class="fa-solid fa-shield-halved text-accentGreen mr-1"></i> Fullstack (Front & Node.js)
             </div>
         </div>
     </header>
@@ -48,58 +54,117 @@
         
         <!-- Sidebar / Navegação -->
         <aside class="lg:col-span-1 space-y-2">
-            <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 px-2">Serviços da API</h2>
+            <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3 px-2">Ferramentas</h2>
             
-            <button onclick="alternarFerramenta('conversor')" id="btn-conversor" class="botao-ferramenta w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all bg-accentGreen text-darkBg font-medium shadow-lg shadow-accentGreen/10 cursor-pointer">
-                <i class="fa-solid fa-file-arrow-down w-5 text-center"></i>
-                <span>Conversor Universal</span>
+            <button onclick="alternarFerramenta('imagem')" id="btn-imagem" class="botao-ferramenta w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all bg-accentGreen text-darkBg font-medium shadow-lg shadow-accentGreen/10 cursor-pointer">
+                <i class="fa-solid fa-image w-5 text-center"></i>
+                <span>Conversor de Imagens</span>
             </button>
 
-            <button onclick="alternarFerramenta('status')" id="btn-status" class="botao-ferramenta w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all text-slate-300 hover:bg-slate-800/60 hover:text-white cursor-pointer">
-                <i class="fa-solid fa-heart-pulse w-5 text-center"></i>
-                <span>Status do Servidor</span>
+            <button onclick="alternarFerramenta('pdf')" id="btn-pdf" class="botao-ferramenta w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all text-slate-300 hover:bg-slate-800/60 hover:text-white cursor-pointer">
+                <i class="fa-solid fa-file-pdf w-5 text-center"></i>
+                <span>Mesclar PDFs</span>
+            </button>
+
+            <button onclick="alternarFerramenta('zip')" id="btn-zip" class="botao-ferramenta w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all text-slate-300 hover:bg-slate-800/60 hover:text-white cursor-pointer">
+                <i class="fa-solid fa-file-zipper w-5 text-center"></i>
+                <span>Compactador ZIP</span>
+            </button>
+
+            <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mt-6 mb-3 px-2">Servidor / API</h2>
+
+            <button onclick="alternarFerramenta('servidor')" id="btn-servidor" class="botao-ferramenta w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all text-slate-300 hover:bg-slate-800/60 hover:text-white cursor-pointer">
+                <i class="fa-solid fa-server w-5 text-center"></i>
+                <span>Status da API (Node.js)</span>
             </button>
         </aside>
 
         <!-- Painel de Operação -->
         <section class="lg:col-span-3 bg-cardBg rounded-2xl border border-slate-800 p-6 shadow-xl flex flex-col justify-between">
             
-            <!-- PAINEL 1: CONVERSOR UNIVERSAL (Envia para o Node.js) -->
-            <div id="painel-conversor" class="painel-ferramenta space-y-6">
+            <!-- PAINEL 1: IMAGEM -->
+            <div id="painel-imagem" class="painel-ferramenta space-y-6">
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-1">Processamento via Servidor (Node.js)</h3>
-                    <p class="text-sm text-slate-400">Envie qualquer arquivo suportado para o backend processar de forma robusta.</p>
+                    <h3 class="text-xl font-bold text-white mb-1">Conversor & Redimensionador de Imagens</h3>
+                    <p class="text-sm text-slate-400">Converta PNG/JPG para WebP ou redimensione imagens direto no navegador.</p>
                 </div>
 
-                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('arquivo-servidor').click()">
-                    <input type="file" id="arquivo-servidor" class="hidden" onchange="tratarSelecaoArquivo(event)">
+                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('arquivo-imagem').click()">
+                    <input type="file" id="arquivo-imagem" accept="image/*" class="hidden" onchange="tratarSelecaoImagem(event)">
                     <i class="fa-solid fa-cloud-arrow-up text-4xl text-accentGreen mb-3"></i>
-                    <p class="text-sm font-medium text-slate-200">Clique para selecionar o arquivo ou arraste aqui</p>
-                    <p id="nome-arquivo-servidor" class="text-xs text-accentGreen mt-2 font-mono"></p>
+                    <p class="text-sm font-medium text-slate-200">Clique para selecionar a imagem ou arraste aqui</p>
+                    <p id="nome-arquivo-imagem" class="text-xs text-accentGreen mt-2 font-mono"></p>
                 </div>
 
-                <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1">Ação Desejada</label>
-                    <select id="tipo-conversao" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-accentGreen">
-                        <option value="otimizar">Otimizar / Processar Arquivo</option>
-                        <option value="converter-pdf">Converter para PDF (Documentos/Office)</option>
-                    </select>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Formato de Saída</label>
+                        <select id="formato-saida-imagem" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-accentGreen">
+                            <option value="image/webp">WebP (Alta Performance)</option>
+                            <option value="image/jpeg">JPEG</option>
+                            <option value="image/png">PNG</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Qualidade (0.1 a 1.0)</label>
+                        <input type="number" id="qualidade-imagem" value="0.8" step="0.1" min="0.1" max="1.0" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-accentGreen">
+                    </div>
                 </div>
 
-                <button onclick="enviarParaServidor()" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all shadow-lg shadow-accentGreen/20 cursor-pointer">
-                    Enviar para o Servidor Node.js
+                <button onclick="converterImagem()" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all shadow-lg shadow-accentGreen/20 cursor-pointer">
+                    Converter Imagem
                 </button>
             </div>
 
-            <!-- PAINEL 2: STATUS DO SERVIDOR -->
-            <div id="painel-status" class="painel-ferramenta space-y-6 hidden">
+            <!-- PAINEL 2: PDF -->
+            <div id="painel-pdf" class="painel-ferramenta space-y-6 hidden">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-1">Unir Múltiplos PDFs</h3>
+                    <p class="text-sm text-slate-400">Selecione vários arquivos PDF para combiná-los em um único documento sequencial.</p>
+                </div>
+
+                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('arquivos-pdf').click()">
+                    <input type="file" id="arquivos-pdf" accept="application/pdf" multiple class="hidden" onchange="tratarSelecaoPdf(event)">
+                    <i class="fa-solid fa-file-pdf text-4xl text-accentGreen mb-3"></i>
+                    <p class="text-sm font-medium text-slate-200">Selecione dois ou mais arquivos PDF</p>
+                    <p id="contador-arquivos-pdf" class="text-xs text-accentGreen mt-2 font-mono"></p>
+                </div>
+
+                <button onclick="mesclarPdfs()" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all shadow-lg shadow-accentGreen/20 cursor-pointer">
+                    Mesclar PDFs
+                </button>
+            </div>
+
+            <!-- PAINEL 3: ZIP -->
+            <div id="painel-zip" class="painel-ferramenta space-y-6 hidden">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-1">Compactador ZIP</h3>
+                    <p class="text-sm text-slate-400">Selecione múltiplos arquivos de qualquer formato para baixar um único arquivo .zip compactado.</p>
+                </div>
+
+                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('arquivos-zip').click()">
+                    <input type="file" id="arquivos-zip" multiple class="hidden" onchange="tratarSelecaoZip(event)">
+                    <i class="fa-solid fa-file-zipper text-4xl text-accentGreen mb-3"></i>
+                    <p class="text-sm font-medium text-slate-200">Selecione os arquivos para compactar</p>
+                    <p id="contador-arquivos-zip" class="text-xs text-accentGreen mt-2 font-mono"></p>
+                </div>
+
+                <button onclick="criarZip()" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all shadow-lg shadow-accentGreen/20 cursor-pointer">
+                    Gerar Arquivo ZIP
+                </button>
+            </div>
+
+            <!-- PAINEL 4: SERVIDOR / API -->
+            <div id="painel-servidor" class="painel-ferramenta space-y-6 hidden">
                 <div>
                     <h3 class="text-xl font-bold text-white mb-1">Saúde da API (Health Check)</h3>
-                    <p class="text-sm text-slate-400">Verifique se o seu servidor Fastify está online e respondendo.</p>
+                    <p class="text-sm text-slate-400">Verifique a conexão com o seu servidor backend em Node.js / Fastify.</p>
                 </div>
+
                 <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 font-mono text-xs text-accentGreen" id="conteudo-status">
-                    Clique no botão abaixo para testar a conexão com a API...
+                    Clique no botão abaixo para testar a conexão...
                 </div>
+
                 <button onclick="verificarSaudeApi()" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all shadow-lg shadow-accentGreen/20 cursor-pointer">
                     Testar Conexão com o Servidor
                 </button>
@@ -107,7 +172,7 @@
 
             <!-- Feedback -->
             <div id="caixa-status" class="mt-6 pt-4 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between">
-                <span>Conexão: <strong class="text-accentGreen">Pronto</strong></span>
+                <span>Status: <strong class="text-accentGreen">Pronto para uso</strong></span>
                 <span id="feedback-acao" class="font-mono text-slate-300"></span>
             </div>
         </section>
@@ -116,7 +181,7 @@
 
     <!-- Footer -->
     <footer class="border-t border-slate-800 py-4 text-center text-xs text-slate-500">
-        WebTools Box API Client &copy; 2026
+        WebTools Box &copy; 2026 — Portfólio Profissional
     </footer>
 
     <!-- Arquivo JavaScript Externo -->
