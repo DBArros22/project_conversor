@@ -98,7 +98,6 @@ function tratarSelecaoUnicaPdf(evento, idInfo) {
 }
 
 async function mesclarPdfs() {
-    // Suporta tanto o array principal quanto a variável da nova seção de junção se houver
     const listaArquivos = arquivosPdfSelecionados.length > 0 ? arquivosPdfSelecionados : arquivosMultiplosPdf;
 
     if (listaArquivos.length < 2) {
@@ -132,7 +131,6 @@ async function mesclarPdfs() {
     }
 }
 
-// Atalho para manter compatibilidade com o botão da nova aba de junção
 async function executarMesclarPdfs() {
     await mesclarPdfs();
 }
@@ -194,7 +192,6 @@ async function verificarSaudeApi() {
 }
 
 async function enviarParaServidor(acaoEspecifica = null) {
-    // Suporte flexível para arquivo selecionado via input genérico ou via seletor único padrão
     const arquivoAlvo = arquivoServidorSelecionado || arquivoUnicoSelecionado;
 
     if (!arquivoAlvo) {
@@ -202,8 +199,8 @@ async function enviarParaServidor(acaoEspecifica = null) {
         return;
     }
 
-    const acao = acaoEspecifica || document.getElementById('tipo-conversao')?.value || document.getElementById('formato-destino-office')?.value || 'otimizar';
-    document.getElementById('feedback-acao').innerText = 'Enviando arquivo para o servidor...';
+    const acao = acaoEspecifica || document.getElementById('tipo-conversao')?.value || document.getElementById('sub-acao-conv-pdf')?.value || document.getElementById('sub-acao-de-pdf')?.value || document.getElementById('sub-acao-editar-pdf')?.value || document.getElementById('sub-acao-seg-pdf')?.value || 'otimizar';
+    document.getElementById('feedback-acao').innerText = `Enviando arquivo para o servidor (${acao})...`;
 
     const formData = new FormData();
     formData.append('arquivo', arquivoAlvo);
@@ -221,7 +218,7 @@ async function enviarParaServidor(acaoEspecifica = null) {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `processado-${arquivoAlvo.name}`;
+        link.download = `processado-${acao}-${arquivoAlvo.name}`;
         link.click();
 
         document.getElementById('feedback-acao').innerText = 'Arquivo processado e baixado com sucesso!';
@@ -232,7 +229,6 @@ async function enviarParaServidor(acaoEspecifica = null) {
     }
 }
 
-// Atalho para funções de envio ao servidor chamadas por botões específicos
 async function executarEnvioServidor(acao) {
     await enviarParaServidor(acao);
 }
