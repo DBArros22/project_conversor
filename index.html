@@ -60,16 +60,10 @@
                         <i class="fa-solid fa-scissors w-5 text-center"></i><span>Dividir PDF</span>
                     </button>
                     <button onclick="alternarFerramenta('comprimir-pdf')" id="btn-comprimir-pdf" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
-                        <i class="fa-solid fa-compress w-5 text-center"></i><span>Comprimir PDF</span>
+                        <i class="fa-solid fa-compress w-5 text-center"></i><span>Comprimir e Reparar</span>
                     </button>
                     <button onclick="alternarFerramenta('rodar-pdf')" id="btn-rodar-pdf" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
                         <i class="fa-solid fa-rotate w-5 text-center"></i><span>Rodar / Girar PDF</span>
-                    </button>
-                    <button onclick="alternarFerramenta('numeros-pagina')" id="btn-numeros-pagina" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
-                        <i class="fa-solid fa-list-ol w-5 text-center"></i><span>Números de Página</span>
-                    </button>
-                    <button onclick="alternarFerramenta('marca-dagua')" id="btn-marca-dagua" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
-                        <i class="fa-solid fa-stamp w-5 text-center"></i><span>Marca d'Água</span>
                     </button>
                 </div>
             </div>
@@ -77,32 +71,23 @@
             <div>
                 <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 px-2">Conversão Universal</h2>
                 <div class="space-y-1">
-                    <button onclick="alternarFerramenta('pdf-para-office')" id="btn-pdf-para-office" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
-                        <i class="fa-solid fa-file-excel w-5 text-center"></i><span>PDF para Word / Excel / PPT</span>
+                    <button onclick="alternarFerramenta('converter-para-pdf')" id="btn-converter-para-pdf" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
+                        <i class="fa-solid fa-file-arrow-up w-5 text-center"></i><span>Converter em PDF</span>
                     </button>
-                    <button onclick="alternarFerramenta('office-para-pdf')" id="btn-office-para-pdf" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
-                        <i class="fa-solid fa-file-word w-5 text-center"></i><span>Word / Excel / PPT para PDF</span>
-                    </button>
-                    <button onclick="alternarFerramenta('pdf-para-jpg')" id="btn-pdf-para-jpg" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
-                        <i class="fa-solid fa-file-image w-5 text-center"></i><span>PDF para JPG / JPG para PDF</span>
-                    </button>
-                    <button onclick="alternarFerramenta('html-para-pdf')" id="btn-html-para-pdf" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
-                        <i class="fa-solid fa-globe w-5 text-center"></i><span>HTML / URL para PDF</span>
+                    <button onclick="alternarFerramenta('converter-de-pdf')" id="btn-converter-de-pdf" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
+                        <i class="fa-solid fa-file-arrow-down w-5 text-center"></i><span>Converter de PDF</span>
                     </button>
                 </div>
             </div>
 
             <div>
-                <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 px-2">Recursos Avançados & IA</h2>
+                <h2 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2 px-2">Edição, IA & Segurança</h2>
                 <div class="space-y-1">
-                    <button onclick="alternarFerramenta('ocr-pdf')" id="btn-ocr-pdf" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
-                        <i class="fa-solid fa-font w-5 text-center"></i><span>OCR & PDF para Markdown</span>
-                    </button>
-                    <button onclick="alternarFerramenta('resumir-ia')" id="btn-resumir-ia" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
-                        <i class="fa-solid fa-brain w-5 text-center"></i><span>Resumir & Traduzir com IA</span>
+                    <button onclick="alternarFerramenta('editar-pdf')" id="btn-editar-pdf" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
+                        <i class="fa-solid fa-pen-to-square w-5 text-center"></i><span>Editar e Organizar PDF</span>
                     </button>
                     <button onclick="alternarFerramenta('seguranca-pdf')" id="btn-seguranca-pdf" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
-                        <i class="fa-solid fa-lock w-5 text-center"></i><span>Proteger / Desbloquear PDF</span>
+                        <i class="fa-solid fa-shield-halved w-5 text-center"></i><span>Segurança e Assinatura</span>
                     </button>
                     <button onclick="alternarFerramenta('servidor')" id="btn-servidor" class="botao-ferramenta w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all text-sm text-slate-300 hover:bg-slate-800/60 cursor-pointer">
                         <i class="fa-solid fa-server w-5 text-center"></i><span>Status da API (Node.js)</span>
@@ -129,60 +114,155 @@
                 <button onclick="executarMesclarPdfs()" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all cursor-pointer">Processar e Baixar PDF Unificado</button>
             </div>
 
-            <!-- 2. PAINEL COMPRIMIR PDF -->
-            <div id="painel-comprimir-pdf" class="painel-ferramenta space-y-6 hidden">
+            <!-- 2. PAINEL DIVIDIR PDF -->
+            <div id="painel-dividir-pdf" class="painel-ferramenta space-y-6 hidden">
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-1">Comprimir PDF</h3>
-                    <p class="text-sm text-slate-400">Reduza o tamanho do arquivo otimizando imagens e estruturas internas.</p>
+                    <h3 class="text-xl font-bold text-white mb-1">Dividir PDF</h3>
+                    <p class="text-sm text-slate-400">Selecione um intervalo de páginas ou separe páginas individuais do documento.</p>
                 </div>
-                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('input-comprimir-pdf').click()">
-                    <input type="file" id="input-comprimir-pdf" accept="application/pdf" class="hidden" onchange="tratarSelecaoUnicaPdf(event, 'info-comprimir-pdf')">
-                    <i class="fa-solid fa-compress text-4xl text-accentGreen mb-3"></i>
-                    <p class="text-sm font-medium text-slate-200">Selecione o PDF para compactar</p>
-                    <p id="info-comprimir-pdf" class="text-xs text-accentGreen mt-2 font-mono"></p>
+                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('input-dividir-pdf').click()">
+                    <input type="file" id="input-dividir-pdf" accept="application/pdf" class="hidden" onchange="tratarSelecaoUnicaPdf(event, 'info-dividir-pdf')">
+                    <i class="fa-solid fa-scissors text-4xl text-accentGreen mb-3"></i>
+                    <p class="text-sm font-medium text-slate-200">Selecione o PDF para dividir</p>
+                    <p id="info-dividir-pdf" class="text-xs text-accentGreen mt-2 font-mono"></p>
                 </div>
-                <button onclick="executarEnvioServidor('comprimir')" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all cursor-pointer">Enviar para Otimização no Servidor</button>
+                <button onclick="executarEnvioServidor('dividir-pdf')" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all cursor-pointer">Dividir PDF</button>
             </div>
 
-            <!-- 3. PAINEL PDF PARA OFFICE (Word, Excel, PPT) -->
-            <div id="painel-pdf-para-office" class="painel-ferramenta space-y-6 hidden">
+            <!-- 3. PAINEL COMPRIMIR E REPARAR PDF -->
+            <div id="painel-comprimir-pdf" class="painel-ferramenta space-y-6 hidden">
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-1">Converter PDF para Office (Word, Excel, PowerPoint)</h3>
-                    <p class="text-sm text-slate-400">Extraia tabelas e textos estruturados para formatos editáveis.</p>
+                    <h3 class="text-xl font-bold text-white mb-1">Comprimir e Reparar PDF</h3>
+                    <p class="text-sm text-slate-400">Diminua o tamanho do arquivo ou recupere documentos corrompidos.</p>
                 </div>
-                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('input-pdf-office').click()">
-                    <input type="file" id="input-pdf-office" accept="application/pdf" class="hidden" onchange="tratarSelecaoUnicaPdf(event, 'info-pdf-office')">
-                    <i class="fa-solid fa-file-excel text-4xl text-accentGreen mb-3"></i>
-                    <p class="text-sm font-medium text-slate-200">Selecione o PDF de origem</p>
-                    <p id="info-pdf-office" class="text-xs text-accentGreen mt-2 font-mono"></p>
+                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('input-comprimir').click()">
+                    <input type="file" id="input-comprimir" accept="application/pdf" class="hidden" onchange="tratarSelecaoUnicaPdf(event, 'info-comprimir')">
+                    <i class="fa-solid fa-compress text-4xl text-accentGreen mb-3"></i>
+                    <p class="text-sm font-medium text-slate-200">Selecione o PDF</p>
+                    <p id="info-comprimir" class="text-xs text-accentGreen mt-2 font-mono"></p>
+                </div>
+                <div class="flex gap-4">
+                    <button onclick="executarEnvioServidor('comprimir-pdf')" class="w-1/2 bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all cursor-pointer">Comprimir PDF</button>
+                    <button onclick="executarEnvioServidor('reparar-pdf')" class="w-1/2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-3 rounded-xl transition-all cursor-pointer">Reparar PDF</button>
+                </div>
+            </div>
+
+            <!-- 4. PAINEL RODAR / GIRAR PDF -->
+            <div id="painel-rodar-pdf" class="painel-ferramenta space-y-6 hidden">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-1">Rodar / Girar PDF</h3>
+                    <p class="text-sm text-slate-400">Gire a orientação das páginas do seu documento PDF de uma só vez.</p>
+                </div>
+                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('input-rodar-pdf').click()">
+                    <input type="file" id="input-rodar-pdf" accept="application/pdf" class="hidden" onchange="tratarSelecaoUnicaPdf(event, 'info-rodar-pdf')">
+                    <i class="fa-solid fa-rotate text-4xl text-accentGreen mb-3"></i>
+                    <p class="text-sm font-medium text-slate-200">Selecione o PDF para girar</p>
+                    <p id="info-rodar-pdf" class="text-xs text-accentGreen mt-2 font-mono"></p>
+                </div>
+                <button onclick="executarEnvioServidor('rodar-pdf')" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all cursor-pointer">Girar PDF</button>
+            </div>
+
+            <!-- 5. PAINEL CONVERTER EM PDF -->
+            <div id="painel-converter-para-pdf" class="painel-ferramenta space-y-6 hidden">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-1">Converter em PDF</h3>
+                    <p class="text-sm text-slate-400">Transforme imagens, arquivos do Office, páginas HTML ou documentos escaneados em PDF.</p>
+                </div>
+                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('input-conv-pdf').click()">
+                    <input type="file" id="input-conv-pdf" accept=".jpg,.png,.doc,.docx,.xls,.xlsx,.ppt,.pptx,application/pdf,image/*" class="hidden" onchange="tratarSelecaoUnicaPdf(event, 'info-conv-pdf')">
+                    <i class="fa-solid fa-file-arrow-up text-4xl text-accentGreen mb-3"></i>
+                    <p class="text-sm font-medium text-slate-200">Selecione o arquivo de origem</p>
+                    <p id="info-conv-pdf" class="text-xs text-accentGreen mt-2 font-mono"></p>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Tipo de Conversão</label>
+                    <select id="sub-acao-conv-pdf" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200">
+                        <option value="jpg-para-pdf">JPG / Imagem para PDF</option>
+                        <option value="word-para-pdf">Word para PDF (.docx)</option>
+                        <option value="powerpoint-para-pdf">PowerPoint para PDF (.pptx)</option>
+                        <option value="excel-para-pdf">Excel para PDF (.xlsx)</option>
+                        <option value="html-para-pdf">HTML / URL para PDF</option>
+                        <option value="ocr-pdf">OCR PDF (Escaneado para Pesquisável)</option>
+                    </select>
+                </div>
+                <button onclick="executarEnvioServidor(document.getElementById('sub-acao-conv-pdf').value)" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all cursor-pointer">Converter para PDF</button>
+            </div>
+
+            <!-- 6. PAINEL CONVERTER DE PDF -->
+            <div id="painel-converter-de-pdf" class="painel-ferramenta space-y-6 hidden">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-1">Converter de PDF</h3>
+                    <p class="text-sm text-slate-400">Extraia o conteúdo do seu PDF para formatos editáveis ou de arquivo de longa duração.</p>
+                </div>
+                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('input-de-pdf').click()">
+                    <input type="file" id="input-de-pdf" accept="application/pdf" class="hidden" onchange="tratarSelecaoUnicaPdf(event, 'info-de-pdf')">
+                    <i class="fa-solid fa-file-arrow-down text-4xl text-accentGreen mb-3"></i>
+                    <p class="text-sm font-medium text-slate-200">Selecione o documento PDF</p>
+                    <p id="info-de-pdf" class="text-xs text-accentGreen mt-2 font-mono"></p>
                 </div>
                 <div>
                     <label class="block text-xs font-medium text-slate-400 mb-1">Formato de Destino</label>
-                    <select id="formato-destino-office" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200">
-                        <option value="docx">Microsoft Word (.docx)</option>
-                        <option value="xlsx">Microsoft Excel (.xlsx)</option>
-                        <option value="pptx">Microsoft PowerPoint (.pptx)</option>
+                    <select id="sub-acao-de-pdf" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200">
+                        <option value="pdf-para-jpg">PDF para JPG</option>
+                        <option value="pdf-para-word">PDF para Word (.docx)</option>
+                        <option value="pdf-para-powerpoint">PDF para PowerPoint (.pptx)</option>
+                        <option value="pdf-para-excel">PDF para Excel (.xlsx)</option>
+                        <option value="pdf-para-pdfa">PDF para PDF/A (Arquivamento)</option>
                     </select>
                 </div>
-                <button onclick="executarEnvioServidor('converter-office')" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all cursor-pointer">Converter Arquivo</button>
+                <button onclick="executarEnvioServidor(document.getElementById('sub-acao-de-pdf').value)" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all cursor-pointer">Converter Arquivo</button>
             </div>
 
-            <!-- 4. PAINEL OCR & MARKDOWN -->
-            <div id="painel-ocr-pdf" class="painel-ferramenta space-y-6 hidden">
+            <!-- 7. PAINEL EDITAR E ORGANIZAR PDF -->
+            <div id="painel-editar-pdf" class="painel-ferramenta space-y-6 hidden">
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-1">OCR PDF & Conversão para Markdown</h3>
-                    <p class="text-sm text-slate-400">Torne PDFs escaneados pesquisáveis ou converta documentos diretamente para Markdown (.md).</p>
+                    <h3 class="text-xl font-bold text-white mb-1">Editar e Organizar PDF</h3>
+                    <p class="text-sm text-slate-400">Modifique a estrutura visual, aplique marcas d'água, numeração ou manipule páginas.</p>
                 </div>
-                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('input-ocr').click()">
-                    <input type="file" id="input-ocr" accept="application/pdf,image/*" class="hidden" onchange="tratarSelecaoUnicaPdf(event, 'info-ocr')">
-                    <i class="fa-solid fa-font text-4xl text-accentGreen mb-3"></i>
-                    <p class="text-sm font-medium text-slate-200">Selecione o documento escaneado</p>
-                    <p id="info-ocr" class="text-xs text-accentGreen mt-2 font-mono"></p>
+                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('input-editar-pdf').click()">
+                    <input type="file" id="input-editar-pdf" accept="application/pdf" class="hidden" onchange="tratarSelecaoUnicaPdf(event, 'info-editar-pdf')">
+                    <i class="fa-solid fa-pen-to-square text-4xl text-accentGreen mb-3"></i>
+                    <p class="text-sm font-medium text-slate-200">Selecione o PDF</p>
+                    <p id="info-editar-pdf" class="text-xs text-accentGreen mt-2 font-mono"></p>
                 </div>
-                <button onclick="executarEnvioServidor('ocr-markdown')" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all cursor-pointer">Processar OCR / Markdown</button>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Ferramenta de Edição</label>
+                    <select id="sub-acao-editar-pdf" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200">
+                        <option value="numeros-pagina">Inserir Números de Página</option>
+                        <option value="marca-dagua">Inserir Marca d'Água</option>
+                        <option value="recortar-pdf">Recortar PDF (Crop)</option>
+                        <option value="formularios-pdf">Formulários PDF Interativos</option>
+                    </select>
+                </div>
+                <button onclick="executarEnvioServidor(document.getElementById('sub-acao-editar-pdf').value)" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all cursor-pointer">Aplicar Alteração</button>
             </div>
 
-            <!-- 5. PAINEL STATUS DO SERVIDOR -->
+            <!-- 8. PAINEL SEGURANÇA E ASSINATURA -->
+            <div id="painel-seguranca-pdf" class="painel-ferramenta space-y-6 hidden">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-1">Segurança, Assinatura e Comparação</h3>
+                    <p class="text-sm text-slate-400">Proteja, remova senhas, assine digitalmente ou compare versões de documentos.</p>
+                </div>
+                <div class="border-2 border-dashed border-slate-700 hover:border-accentGreen rounded-xl p-8 text-center transition-colors cursor-pointer relative bg-slate-900/40" onclick="document.getElementById('input-seg-pdf').click()">
+                    <input type="file" id="input-seg-pdf" accept="application/pdf" class="hidden" onchange="tratarSelecaoUnicaPdf(event, 'info-seg-pdf')">
+                    <i class="fa-solid fa-shield-halved text-4xl text-accentGreen mb-3"></i>
+                    <p class="text-sm font-medium text-slate-200">Selecione o PDF</p>
+                    <p id="info-seg-pdf" class="text-xs text-accentGreen mt-2 font-mono"></p>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-slate-400 mb-1">Ação de Segurança</label>
+                    <select id="sub-acao-seg-pdf" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-200">
+                        <option value="proteger-pdf">Proteger com Senha</option>
+                        <option value="desbloquear-pdf">Desbloquear / Remover Senha</option>
+                        <option value="assinar-pdf">Assinar PDF Eletronicamente</option>
+                        <option value="ocultar-pdf">Ocultar / Redigir Informações Sensíveis</option>
+                        <option value="comparar-pdf">Comparar Versões de PDFs</option>
+                    </select>
+                </div>
+                <button onclick="executarEnvioServidor(document.getElementById('sub-acao-seg-pdf').value)" class="w-full bg-accentGreen hover:bg-accentGreenHover text-darkBg font-semibold py-3 rounded-xl transition-all cursor-pointer">Executar Operação</button>
+            </div>
+
+            <!-- 9. PAINEL STATUS DO SERVIDOR -->
             <div id="painel-servidor" class="painel-ferramenta space-y-6 hidden">
                 <div>
                     <h3 class="text-xl font-bold text-white mb-1">Status da API (Node.js / Fastify)</h3>
