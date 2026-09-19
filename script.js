@@ -1,3 +1,6 @@
+const API_URL = 'http://localhost:3333';
+
+// Alternar abas da SPA
 function alternarFerramenta(nomeFerramenta) {
     document.querySelectorAll('.painel-ferramenta').forEach(painel => painel.classList.add('hidden'));
     document.querySelectorAll('.botao-ferramenta').forEach(botao => {
@@ -15,6 +18,7 @@ function alternarFerramenta(nomeFerramenta) {
 let arquivoImagemSelecionada = null;
 let arquivosPdfSelecionados = [];
 let arquivosZipSelecionados = [];
+let arquivoServidorSelecionado = null;
 
 // 1. Lógica do Conversor de Imagem
 function tratarSelecaoImagem(evento) {
@@ -126,4 +130,66 @@ async function criarZip() {
     linkDownload.download = `arquivo-compactado-${Date.now()}.zip`;
     linkDownload.click();
     document.getElementById('feedback-acao').innerText = 'Arquivo ZIP gerado com sucesso!';
+}
+
+// 4. Lógica de Comunicação com o Servidor Node.js (Fastify)
+function tratarSelecaoArquivoServidor(evento) {
+    arquivoServidorSelecionado = evento.target.files[0];
+    if (arquivoServidorSelecionado) {
+        const elemNome = document.getElementById('nome-arquivo-servidor');
+        if (elemNome) elemNome.innerText = `Selecionado: ${arquivoServidorSelecionado.name}`;
+    }
+}
+
+async function verificarSaudeApi() {
+    const blocoStatus = document.getElementById('conteudo-status');
+    if (!blocoStatus) return;
+    
+    blocoStatus.innerText = 'Conectando ao servidor...';
+    
+    try {
+        const resposta = await fetch(`${API_URL}/health`);
+        const dados = await resposta.json();
+        blocoStatus.innerText = JSON.stringify(dados, null, 2);
+        document.getElementById('feedback-acao').innerText = 'Servidor online!';
+    } catch (erro) {
+        blocoStatus.innerText = 'Erro: Não foi possível conectar ao servidor Node.js na porta 3333.\nVerifique se o comando "npm run dev" está rodando no terminal.';
+        document.getElementById('feedback-acao').innerText = 'Falha na conexão.';
+    }
+}
+
+async function enviarParaServidor() {
+    if (!arquivoServidorSelecionado) {
+        alert('Selecione um arquivo primeiro.');
+        return;
+    }
+
+    const acao = document.getElementById('tipo-conversao')?.value || 'otimizar';
+    document.getElementById('feedback-acao').innerText = 'Enviando arquivo para o servidor...';
+
+    const formData = new FormData();
+    formData.append('arquivo', arquivoServidorSelecionado);
+    formData.append('acao', acao);
+
+    try {
+        const resposta = await fetch(`${API_URL}/processar`, {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!resposta.ok) throw new Error('Erro ao processar no servidor.');
+
+        const blob = await resposta.blob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `processado-${arquivoServidorSelecionado.name}`;
+        link.click();
+
+        document.getElementById('feedback-acao').innerText = 'Arquivo processado e baixado com sucesso!';
+    } catch (erro) {
+        console.error(erro);
+        alert('O endpoint do backend ainda precisa ser implementado para receber este arquivo.');
+        document.getElementById('feedback-acao').innerText = 'Aguardando implementação da rota no Node.js.';
+    }
 }
