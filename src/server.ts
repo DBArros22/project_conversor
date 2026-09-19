@@ -42,7 +42,7 @@ app.post('/processar', async (request, reply) => {
       
       // Carrega o arquivo Excel a partir do buffer
       // O tipo 'any' ou conversão para Buffer do Node é aceita pelo exceljs
-      await workbook.xlsx.load(buffer as unknown as Buffer);
+      await workbook.xlsx.load(buffer as any);
 
       let htmlContent = `
         <html>
