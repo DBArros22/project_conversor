@@ -7,9 +7,15 @@ function alternarFerramenta(nomeFerramenta) {
         botao.className = "botao-ferramenta w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all text-slate-300 hover:bg-slate-800/60 hover:text-white cursor-pointer";
     });
 
-    document.getElementById(`painel-${nomeFerramenta}`).classList.remove('hidden');
+    const painelAlvo = document.getElementById(`painel-${nomeFerramenta}`);
+    if (painelAlvo) {
+        painelAlvo.classList.remove('hidden');
+    }
+    
     const botaoAtivo = document.getElementById(`btn-${nomeFerramenta}`);
-    botaoAtivo.className = "botao-ferramenta w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all bg-accentGreen text-darkBg font-medium shadow-lg shadow-accentGreen/10 cursor-pointer";
+    if (botaoAtivo) {
+        botaoAtivo.className = "botao-ferramenta w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all bg-accentGreen text-darkBg font-medium shadow-lg shadow-accentGreen/10 cursor-pointer";
+    }
     
     document.getElementById('feedback-acao').innerText = '';
 }
@@ -19,12 +25,15 @@ let arquivoImagemSelecionada = null;
 let arquivosPdfSelecionados = [];
 let arquivosZipSelecionados = [];
 let arquivoServidorSelecionado = null;
+let arquivosMultiplosPdf = [];
+let arquivoUnicoSelecionado = null;
 
 // 1. Lógica do Conversor de Imagem
 function tratarSelecaoImagem(evento) {
     arquivoImagemSelecionada = evento.target.files[0];
     if (arquivoImagemSelecionada) {
-        document.getElementById('nome-arquivo-imagem').innerText = `Arquivo carregado: ${arquivoImagemSelecionada.name}`;
+        const elem = document.getElementById('nome-arquivo-imagem');
+        if (elem) elem.innerText = `Arquivo carregado: ${arquivoImagemSelecionada.name}`;
     }
 }
 
@@ -45,8 +54,8 @@ function converterImagem() {
             const contexto = canvas.getContext('2d');
             contexto.drawImage(imagem, 0, 0);
 
-            const formato = document.getElementById('formato-saida-imagem').value;
-            const qualidade = parseFloat(document.getElementById('qualidade-imagem').value);
+            const formato = document.getElementById('formato-saida-imagem')?.value || 'image/jpeg';
+            const qualidade = parseFloat(document.getElementById('qualidade-imagem')?.value || '0.9');
 
             canvas.toBlob(function(blob) {
                 const url = URL.createObjectURL(blob);
@@ -63,16 +72,36 @@ function converterImagem() {
     leitor.readAsDataURL(arquivoImagemSelecionada);
 }
 
-// 2. Lógica de Mesclagem de PDFs
+// 2. Lógica de Mesclagem de PDFs (Compatível com múltiplos seletores)
 function tratarSelecaoPdf(evento) {
     arquivosPdfSelecionados = evento.target.files;
     if (arquivosPdfSelecionados.length > 0) {
-        document.getElementById('contador-arquivos-pdf').innerText = `${arquivosPdfSelecionados.length} arquivo(s) PDF selecionado(s)`;
+        const elem = document.getElementById('contador-arquivos-pdf');
+        if (elem) elem.innerText = `${arquivosPdfSelecionados.length} arquivo(s) PDF selecionado(s)`;
+    }
+}
+
+function tratarSelecaoMultiplaPdf(evento) {
+    arquivosMultiplosPdf = evento.target.files;
+    if (arquivosMultiplosPdf.length > 0) {
+        const elem = document.getElementById('info-juntar-pdf');
+        if (elem) elem.innerText = `${arquivosMultiplosPdf.length} PDF(s) selecionado(s)`;
+    }
+}
+
+function tratarSelecaoUnicaPdf(evento, idInfo) {
+    arquivoUnicoSelecionado = evento.target.files[0];
+    if (arquivoUnicoSelecionado) {
+        const elem = document.getElementById(idInfo);
+        if (elem) elem.innerText = `Carregado: ${arquivoUnicoSelecionado.name}`;
     }
 }
 
 async function mesclarPdfs() {
-    if (arquivosPdfSelecionados.length < 2) {
+    // Suporta tanto o array principal quanto a variável da nova seção de junção se houver
+    const listaArquivos = arquivosPdfSelecionados.length > 0 ? arquivosPdfSelecionados : arquivosMultiplosPdf;
+
+    if (listaArquivos.length < 2) {
         alert('Selecione pelo menos 2 arquivos PDF para mesclar.');
         return;
     }
@@ -81,7 +110,7 @@ async function mesclarPdfs() {
     try {
         const pdfUnificado = await PDFLib.PDFDocument.create();
 
-        for (let arquivo of arquivosPdfSelecionados) {
+        for (let arquivo of listaArquivos) {
             const bufferArray = await arquivo.arrayBuffer();
             const pdfCarregado = await PDFLib.PDFDocument.load(bufferArray);
             const paginasCopiadas = await pdfUnificado.copyPages(pdfCarregado, pdfCarregado.getPageIndices());
@@ -103,11 +132,17 @@ async function mesclarPdfs() {
     }
 }
 
+// Atalho para manter compatibilidade com o botão da nova aba de junção
+async function executarMesclarPdfs() {
+    await mesclarPdfs();
+}
+
 // 3. Lógica do Criador de ZIP
 function tratarSelecaoZip(evento) {
     arquivosZipSelecionados = evento.target.files;
     if (arquivosZipSelecionados.length > 0) {
-        document.getElementById('contador-arquivos-zip').innerText = `${arquivosZipSelecionados.length} arquivo(s) selecionado(s) para ZIP`;
+        const elem = document.getElementById('contador-arquivos-zip');
+        if (elem) elem.innerText = `${arquivosZipSelecionados.length} arquivo(s) selecionado(s) para ZIP`;
     }
 }
 
@@ -158,17 +193,20 @@ async function verificarSaudeApi() {
     }
 }
 
-async function enviarParaServidor() {
-    if (!arquivoServidorSelecionado) {
+async function enviarParaServidor(acaoEspecifica = null) {
+    // Suporte flexível para arquivo selecionado via input genérico ou via seletor único padrão
+    const arquivoAlvo = arquivoServidorSelecionado || arquivoUnicoSelecionado;
+
+    if (!arquivoAlvo) {
         alert('Selecione um arquivo primeiro.');
         return;
     }
 
-    const acao = document.getElementById('tipo-conversao')?.value || 'otimizar';
+    const acao = acaoEspecifica || document.getElementById('tipo-conversao')?.value || document.getElementById('formato-destino-office')?.value || 'otimizar';
     document.getElementById('feedback-acao').innerText = 'Enviando arquivo para o servidor...';
 
     const formData = new FormData();
-    formData.append('arquivo', arquivoServidorSelecionado);
+    formData.append('arquivo', arquivoAlvo);
     formData.append('acao', acao);
 
     try {
@@ -183,7 +221,7 @@ async function enviarParaServidor() {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `processado-${arquivoServidorSelecionado.name}`;
+        link.download = `processado-${arquivoAlvo.name}`;
         link.click();
 
         document.getElementById('feedback-acao').innerText = 'Arquivo processado e baixado com sucesso!';
@@ -192,4 +230,9 @@ async function enviarParaServidor() {
         alert('O endpoint do backend ainda precisa ser implementado para receber este arquivo.');
         document.getElementById('feedback-acao').innerText = 'Aguardando implementação da rota no Node.js.';
     }
+}
+
+// Atalho para funções de envio ao servidor chamadas por botões específicos
+async function executarEnvioServidor(acao) {
+    await enviarParaServidor(acao);
 }
